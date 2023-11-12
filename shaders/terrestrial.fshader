@@ -14,5 +14,5 @@ void main() {
     light_pos = vec3(0.0, 0.0, 0.0);
     vec3 light = normalize(light_pos - coord);
     float diffuse = max(dot(light, normal), 0.0);
-    frag_color = (ambient + diffuse) * vec4(color, 1.0);
+    frag_color = min((ambient + diffuse), 1.0) * vec4(color, 1.0);
 }
