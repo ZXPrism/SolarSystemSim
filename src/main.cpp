@@ -31,12 +31,12 @@ int main()
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
     gladLoadGL();
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.0f, 0.0f, 0.1f, 1.0f);
     glViewport(0, 0, 1024, 1024);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_MULTISAMPLE);
     glEnable(GL_PROGRAM_POINT_SIZE);
-    // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     // Create a "SolarSystem": (sounds COOOOOOOL!)
     SolarSystem solar_system;

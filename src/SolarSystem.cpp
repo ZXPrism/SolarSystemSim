@@ -44,23 +44,15 @@ void SolarSystem::init()
                  radius1 * cosf(angle), radius1 * sinf(angle),
                  radius1 * cosf(angle1), radius1 * sinf(angle1)};
 
-            // triangle #1 & normal #1
+            // triangle #1
             pushVertex(coords[0], y, coords[1]);
-            pushVertex(coords[2] + coords[4], y + y1, coords[3] + coords[5]);
             pushVertex(coords[2], y, coords[3]);
-            pushVertex(coords[2] + coords[4], y + y1, coords[3] + coords[5]);
             pushVertex(coords[4], y1, coords[5]);
-            pushVertex(coords[2] + coords[4], y + y1, coords[3] + coords[5]);
 
-            // triangle #2 & normal #2
-            // normal #2 is the same as normal #1, for convenience
-            // PS: these two normals are equivalent when the "density" is big enough
+            // triangle #2
             pushVertex(coords[2], y, coords[3]);
-            pushVertex(coords[2] + coords[4], y + y1, coords[3] + coords[5]);
             pushVertex(coords[6], y1, coords[7]);
-            pushVertex(coords[2] + coords[4], y + y1, coords[3] + coords[5]);
             pushVertex(coords[4], y1, coords[5]);
-            pushVertex(coords[2] + coords[4], y + y1, coords[3] + coords[5]);
 
             angle = angle1;
         }
@@ -74,7 +66,7 @@ void SolarSystem::init()
         else
             vertices.push_back(vertices[i]);
     }
-    m_vertex_num = vertices.size() / 6;
+    m_vertex_num = vertices.size() / 3;
 
     glGenBuffers(1, &m_VBO);
     glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
@@ -82,10 +74,8 @@ void SolarSystem::init()
 
     glGenVertexArrays(1, &m_VAO);
     glBindVertexArray(m_VAO);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void *)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *)0);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_TRUE, 6 * sizeof(GLfloat), (void *)(3 * sizeof(float *)));
-    glEnableVertexAttribArray(1);
 
     // 2. Generate the vertices of a circle with given parameters:
     constexpr int density = 512;
